@@ -14,12 +14,12 @@ are imposed in the problem statement needed to compute the solution.
 from typing import List
 
 
-number = input('Insert the sequence of numbers, separated by a space\n')
+number = input('Insert the sequence of numbers, separated by a space:\n')
 number_l : List[int] = [int(x) for x in number.split()]
 
 def sorted_list(number_l:List) -> List:
     
-    if len(number_l) >= 0:
+    if len(number_l) <= 1:
         return number_l
     for j in range(1, len(number_l)):
         key = number_l[j]
