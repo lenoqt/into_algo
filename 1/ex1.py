@@ -17,19 +17,19 @@ from typing import List
 number = input('Insert the sequence of numbers, separated by a space\n')
 number_l : List[int] = [int(x) for x in number.split()]
 
-def i_sort(numbs):
-    # [5, 2, 4, 6, 1, 3]
-    # k=2, i=0 > 
-    sorts : List[int] = []
-    for j in range(1, len(numbs)):
-        key = numbs[j]
-        # insert numbs[j] into the sorted sequence numbs[1..j-1]
+def sorted_list(number_l:List) -> List:
+    
+    if len(number_l) >= 0:
+        return number_l
+    for j in range(1, len(number_l)):
+        key = number_l[j]
+        # Insert number_l[j] into the sorted sequence sorted_list[1...j-1]
         i = j - 1
-        while i > 0 and sorts[i] > key:
-            sorts[i + 1] = sorts[i]
-            i =+ 1
-        sorts[i + 1] = key
-        print(sorts)
+        while i >= 0 and number_l[i] > key:
+            number_l[i + 1] = number_l[i]
+            i -= 1
+        number_l[i + 1] = key
+    return number_l
 
 if __name__ == '__main__':
-    sorta(number_l)
+    print(sorted_list(number_l))
