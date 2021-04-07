@@ -1,0 +1,4 @@
+Pipfile*
+*.txt*
+*.doc
+*.ipynb
