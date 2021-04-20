@@ -71,4 +71,5 @@ Maintenance: The second property is to show that each iteration maintain the inv
 
 Termination: We examine what happens when the loop terminates, the block of code
     causing the for loops terminates when when j > A.length = n.
+http://www.pythontutor.com/visualize.html#code=a%20%3D%20%5B31,41,59,26,41,58%5D%0A%0Adef%20sorted_l%28l%29%3A%0A%20%20if%20len%28l%29%20%3C%3D%201%3A%0A%20%20%20%20return%20l%0A%20%20for%20j%20in%20range%281,%20len%28l%29%29%3A%0A%20%20%20%20key%20%3D%20l%5Bj%5D%0A%20%20%20%20i%20%3D%20j%20-%201%0A%20%20%20%20while%20i%3E%3D0%20and%20l%5Bi%5D%20%3E%20key%3A%0A%20%20%20%20%20%20l%5Bi%2B1%5D%20%3D%20l%5Bi%5D%0A%20%20%20%20%20%20i-%3D1%0A%20%20%20%20l%5Bi%2B1%5D%20%3D%20key%0A%20%20return%20l%0A%0Asorted_l%28a%29&cumulative=false&curInstr=48&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false
 """
