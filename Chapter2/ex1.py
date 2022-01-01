@@ -17,21 +17,23 @@ from typing import List
 number = input('Insert the sequence of numbers, separated by a space:\n')
 number_l : List[int] = [int(x) for x in number.split()]
 
-def sorted_list(number_l:List) -> List:
+def sorted_list(number_l:List, incremental: bool = True) -> List[int]:
     if len(number_l) <= 1:
         return number_l
+    value_check = lambda x, y: x > y if incremental else x < y  
     for j in range(1, len(number_l)):
         key = number_l[j] # this keeps in memory the value to be moved or not
         # Insert number_l[j] into the sorted sequence sorted_list[1...j-1]
         i = j - 1
-        while i >= 0 and number_l[i] > key:
+        while i >= 0 and value_check(number_l[i], key):
             number_l[i + 1] = number_l[i]
             i -= 1
         number_l[i + 1] = key
     return number_l
 
 if __name__ == '__main__':
-    print(sorted_list(number_l))
+    print("Sorted list (Ascending): ", sorted_list(number_l))
+    print("Sorted list (Descending): ", sorted_list(number_l, incremental=False))
 
 """
 In this case of insertion sort. Starting with an array of length > than 1,
