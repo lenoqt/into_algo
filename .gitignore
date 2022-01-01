@@ -2,3 +2,4 @@ Pipfile*
 *.txt*
 *.doc
 *.ipynb
+*.out
