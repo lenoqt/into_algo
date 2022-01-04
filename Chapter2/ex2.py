@@ -1,3 +1,4 @@
+# type: ignore
 """
 The ex1.py is a insertion sort algorithm which takes time roughly equal to c1n^2
 to sort n items, where c1 is a constant that does not depend on n. That is, it 
@@ -36,26 +37,66 @@ The recursion "bottoms out" when the sequence to be sorted has lenght 1, in whic
 case there is no work to be done, since every sequence of lenght 1 is already in
 sorted order.
 
+Having an array A with indices p, q and r such p <= q < r 
+- Divide into A[p..q] (left array) and A[q + 1...r] 
+- Do it recursively until having a sorted small array 
+- Merge then back 
+ie. 
+                 0  1  2  3  4  5  6  7
+            A   [2, 4, 5, 7, 1, 2, 3, 6]
+                /                    \
+        L [2, 4, 5, 7]          R [1, 2, 3, 6]
+          /         \              /         \
+    L [2, 4]    R [5, 7]      L [1, 2]    R [3, 6]
+       /   \       /   \         /   \      /    \  
+   L [2] R [4] L [5] R [7]   L [1] R [2] L [3] R [6]
+      \    /      \    /        \   /       \   /  
+    L [2, 4]    R [5, 7]      L [1, 2]    R [3, 6]
+         \         /              \          / 
+       L [2, 4, 5, 7]           R [1, 2, 3, 6]
+                \                   /  
+            A*  [1, 2, 2, 3, 4, 5, 6]
+
 """
+from copy import deepcopy 
 
-def merge(array, p, q, r):
-    
-    n1 = q - p + 1
-    n2 = r - q
-    l_array = [0 for x in range(n1)]
-    r_array = [0 for x in range(n2)]
-    for i in range(n1):
-        l_array[i] = array[p + i - 1]
-    for j in range(n2):
-        r_array[j] = array[q + j]
-    i = 1
-    j = 1 
-    for k in range(p, r):
-        if l_array[i] <= r_array[j]:
-            array[k] = l_array[i]
-            i += 1
-        else:
-            array[k] = r_array[j]
-            j += 1
+def merge_sort(array):
+    """
+    The implementation has to be sightly different as python does in-place replacement of indexes 
+    """
+    if len(array) > 1:
+    # For a array lenght 8, p = 0, q = 3, r = 7
+    # Where: p is the start index of the subarray, q middle index of the subarray 
+    # and r the end of subarray.
+    # for python indexes have to be adjusted as they start from 0
+        r = len(array)//2 
+        # split the original array into Left and Right arrays 
+        left_array = array[:r]
+        right_array = array[r:]
+        print("L -> ", left_array, "R -> ", right_array)
+        merge_sort(left_array)
+        merge_sort(right_array)
+        # Loop over left array 
+        left_array.append(float('inf')) 
+        right_array.append(float('inf'))
 
-print(merge([2,4,5,7,1,2,3,6,12,11,13,14,15,18,20], 3,4,10))
+        i = j = 0 
+
+        for k in range(0, len(array)):
+            if left_array[i] < right_array[j]:
+                array[k] = left_array[i]
+                i += 1 
+            else:
+                array[k] = right_array[j]
+                j += 1
+
+
+
+if __name__ == "__main__":
+    A = [2, 4, 5, 7, 1, 2, 3, 6]
+    B = deepcopy(A)
+    merge_sort(B)
+    print("Using merge sort --> ", A, "-->", B)
+    print("Using built-in sort --> ", A, "-->", sorted(A))
+
+
