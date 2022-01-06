@@ -36,16 +36,6 @@ void insertSort(std::vector<int> &v, bool incremental = true) {
      * loop invariant has to be true before first iteration
      */
 
-    // bool valueCheck = valueFlag(v[i], key);
-    // std::stringstream ss; 
-    // ss << "\nIteration = " << i << " | "
-    //   << " j = " << j << " | "
-    //   << " i = " << i << " | "
-    //   << " v[j] = " << v[j]  << " | "
-    //   << " v[i] = " << v[i]  << " | "
-    //   << " valueCheck = " << valueCheck; 
-
-    // std::cout << ss.str() << std::endl;
     while (i >= 0 && valueFlag(v[i], key)) {
       v[i + 1] = v[i]; // move to the right side
       i -= 1;          // set sentinel i as  previous value of j
