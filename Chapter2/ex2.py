@@ -99,4 +99,9 @@ if __name__ == "__main__":
     print("Using merge sort --> ", A, "-->", B)
     print("Using built-in sort --> ", A, "-->", sorted(A))
 
+    C = [122, 42321, 52333, 0, 31, 42, 4, 89, 12981, 298382, 828382]
+    D = deepcopy(C)
+    merge_sort(D)
+    print("Using merge sort --> ", C, "-->", D)
+    print("Using built-in sort --> ", C, "-->", sorted(C))
 

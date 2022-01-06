@@ -6,76 +6,65 @@
 #define INF INT_MAX
 // #define INF ((unsigned)~0)
 
-template <typename T> void printVector(std::vector<T> v) {
+template <typename T> 
+void printVector(std::vector<T> &v) {
 
   std::stringstream ss;
-  for (auto x : v) {
+  for (int x : v) {
     ss << x << " ";
   }
   std::cout << ss.str() << std::endl;
-  ss.str(std::string());
-}
-
-template <typename T>
-std::vector<T> copyVector(std::vector<T> const &v, const int begin,
-                          const int end) {
-
-  std::vector<int>::const_iterator first = v.begin() + begin;
-  std::vector<int>::const_iterator last = v.begin() + end + 1;
-  std::vector<int> newV(first, last);
-
-  return newV;
 }
 
 void merge(std::vector<int> &v, const int p, const int q, const int r) {
 
-  // Initialize left and right vectors with extra slot for sentinel value
+  int n1 = q - p + 1;
+  int n2 = r - q;
 
-  std::vector<int> leftVector;
-  std::vector<int> rightVector;
-  leftVector = copyVector(v, p, q);
-  rightVector = copyVector(v, q + 1, r);
-  std::cout << "Left vector\n";
-  printVector(leftVector);
-  std::cout << "Right vector" << std::endl;
-  printVector(rightVector);
-  // leftVector.push_back(INF);
-  // rightVector.push_back(INF);
+  std::vector<int> leftVector(n1);
+  std::vector<int> rightVector(n2);
+
+  for (int i = 0; i < n1; i++)
+    leftVector[i] = v[p + i];
+
+  for (int j = 0; j < n2; j++)
+    rightVector[j] = v[q + 1 + j];
+
+  leftVector.push_back(INF);
+  rightVector.push_back(INF);
 
   int i, j, k;
   i = 0;
   j = 0;
   k = p;
 
-  for (; k != v.size(); k++) {
+  for (; k <= r; k++) {
     if (leftVector[i] <= rightVector[j]) {
       v[k] = leftVector[i];
-      i += 1;
-    }
-    if (v[k] == rightVector[j]) {
-      j += 1;
+      i++;
+    } else {
+      v[k] = rightVector[j];
+      j++;
     }
   }
-  leftVector.clear();
-  rightVector.clear();
 }
 
-void merge_sort(std::vector<int> &v, const int &p, const int &r) {
+void merge_sort(std::vector<int> &v, const int p, const int r) {
   if (p < r) {
 
     int q = (p + r) / 2;
-    int comp = p + 1;
     merge_sort(v, p, q);
-    merge_sort(v, comp, r);
+    merge_sort(v, q + 1, r);
     merge(v, p, q, r);
   }
 }
 
 int main(int argc, char *argv[]) {
 
-  std::vector<int> v{2, 4, 5, 7, 1, 2, 3, 6};
-  int p = 0;
-  int r = v.size() - 1;
+  int p, r;
+  p = 0;
+  r = 7;
+  std::vector<int> v = {2, 4, 5, 7, 1, 2, 3, 6};
   std::cout << "Vector before sorting\n";
   printVector(v);
   merge_sort(v, p, r);
