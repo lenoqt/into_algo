@@ -6,8 +6,7 @@
 #define INF INT_MAX
 // #define INF ((unsigned)~0)
 
-template <typename T> 
-void printVector(std::vector<T> &v) {
+template <typename T> void printVector(std::vector<T> &v) {
 
   std::stringstream ss;
   for (int x : v) {
