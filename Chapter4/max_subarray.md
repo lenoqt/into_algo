@@ -81,3 +81,17 @@ a maximum-subarray. What is left to do is to find a maximum-subarray that crosse
 subarray with the largest sum of the three. 
 
 ![Figure 4-4](./fig4-4.png)
+
+Possible locations of subarrays $A[low..high]$ entirely in $A[low..mid]$, entirely in $A[mid + 1, high]$, 
+or crossing the midpoint $mid$. Any subarray of $A[low..high]$ crossing the midpoint comprises two subarrays 
+$A[i..mid]$ and $A[mid + 1..j]$, where $low <= i <= mid$ and $mid < j <= high$ 
+
+We can easily find a maximum subarray crossing the midpoint in time linear of the size of the subarray 
+$A[low..high]$. This problem is *not* a smaller instance of our original problem, because it has added restriction 
+that the subarray it chooses must cross the midpoint. 
+
+The procedure **Find-Max-Crossing-Subarray** takes as input the array $A$ and the indices $low, mid$ and $high$, 
+and it returns a tuple containing the indices demarcatting a maximum subarray  that crosses the midpoint, 
+along with the sum of the values in a maximum subarray. 
+
+**Check implementation in source Python-CPP files** 
