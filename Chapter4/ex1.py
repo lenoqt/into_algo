@@ -2,8 +2,9 @@ import numpy as np
 import numpy.typing as npt 
 from typing import Tuple 
 
+NDArrayInt = npt.NDArray[np.int_]
 
-def findMaxCrossing(array:npt.ArrayLike, 
+def findMaxCrossing(array: NDArrayInt, 
         low: int, mid: int, high: int) -> Tuple[int, int, float]: 
 
     #Instantiate variables
