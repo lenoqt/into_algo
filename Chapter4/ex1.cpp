@@ -37,7 +37,7 @@ std::tuple<int, int, double> findMaxCrossingSubArray(std::vector<int> &v,
   int maxLeft = 0;
   int maxRight = 0;
 
-  for (int i = mid; i != low; i--) {
+  for (int i = mid; i != low; --i) {
 
     sum = sum + v[i];
     if (sum > leftSum) {
@@ -47,7 +47,8 @@ std::tuple<int, int, double> findMaxCrossingSubArray(std::vector<int> &v,
     }
   }
 
-  for (int j = ++mid; j != high; j++) {
+  sum = 0;
+  for (int j = ++mid; j != high; ++j) {
     sum = sum + v[j];
     if (sum > rightSum) {
       rightSum = sum;
@@ -55,8 +56,11 @@ std::tuple<int, int, double> findMaxCrossingSubArray(std::vector<int> &v,
     }
   }
 
-  int total = leftSum + rightSum;
-  return std::make_tuple(maxLeft, maxRight, total);
+  int totalSum = leftSum + rightSum;
+  std::cout << "leftSum: " << leftSum << std::endl;
+  std::cout << "rightSum: " << rightSum << std::endl;
+  std::cout << "leftSum: " << totalSum << std::endl;
+  return std::make_tuple(maxLeft, maxRight, totalSum);
 }
 
 int main(int argc, char *argv[]) {

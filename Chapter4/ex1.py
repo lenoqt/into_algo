@@ -24,6 +24,10 @@ def findMaxCrossing(array: NDArrayInt,
         if sum > rightSum:
             rightSum = sum 
             maxRight = j 
+
+    print("leftSum: ", leftSum)
+    print("rightSum: ", rightSum)
+    print("totalSum: ", leftSum + rightSum)
     return (maxLeft, maxRight, leftSum + rightSum) 
 
 
