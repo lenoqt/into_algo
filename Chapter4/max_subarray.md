@@ -1,5 +1,5 @@
-\usepackage [utf8] 
-\usepackage {amsmath, amsfofntts, amstthm, graphicx, geometry, lipsum}
+\usepackage[utf8] 
+\usepackage{amsmath, amsfofntts, amstthm, graphicx, geometry, lipsum}
 
 
 # The maximum-subarray problem
