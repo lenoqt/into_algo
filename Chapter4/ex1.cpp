@@ -26,10 +26,9 @@ template <class... Args> void printTuple(const std::tuple<Args...> &t) {
   std::cout << ")\n";
 }
 
-std::tuple<int, int, double> findMaxCrossingSubArray(std::vector<int> &v,
-                                                     unsigned int low,
-                                                     unsigned int mid,
-                                                     unsigned int high) {
+std::tuple<unsigned int, unsigned int, unsigned int>
+findMaxCrossingSubArray(std::vector<int> &v, unsigned int low, unsigned int mid,
+                        unsigned int high) {
 
   int leftSum = _INF;
   int rightSum = _INF;
@@ -57,12 +56,43 @@ std::tuple<int, int, double> findMaxCrossingSubArray(std::vector<int> &v,
   }
 
   int totalSum = leftSum + rightSum;
-  std::cout << "leftSum: " << leftSum << std::endl;
-  std::cout << "rightSum: " << rightSum << std::endl;
-  std::cout << "leftSum: " << totalSum << std::endl;
   return std::make_tuple(maxLeft, maxRight, totalSum);
 }
 
+std::tuple<unsigned int, unsigned int, unsigned int>
+findMaxSubArray(std::vector<int> &v, unsigned int low, unsigned int high) {
+
+  if (high == low) {
+    return std::make_tuple(low, high, v[low]);
+  }
+
+  else {
+
+    unsigned int mid = (low + high) / 2;
+
+    int leftLow, leftHigh, leftSum;
+    std::tie(leftLow, leftHigh, leftSum) = findMaxSubArray(v, low, mid);
+
+    int rightLow, rightHigh, rightSum;
+    std::tie(rightLow, rightHigh, rightSum) = findMaxSubArray(v, mid + 1, high);
+
+    int crossLow, crossHigh, crossSum;
+    std::tie(crossLow, crossHigh, crossSum) =
+        findMaxCrossingSubArray(v, low, mid, high);
+
+    if (leftSum >= rightSum && leftSum >= crossSum) {
+      return std::make_tuple(leftLow, leftHigh, leftSum);
+    }
+
+    else if (rightSum >= leftSum && rightSum >= crossSum) {
+      return std::make_tuple(rightLow, rightHigh, rightSum);
+    }
+
+    else {
+      return std::make_tuple(crossLow, crossHigh, crossSum);
+    }
+  }
+}
 int main(int argc, char *argv[]) {
 
   std::vector<int> v = {13, -3, -25, 20, -3,  -16, -23, 18,
@@ -71,8 +101,13 @@ int main(int argc, char *argv[]) {
   int low{0};
   int mid{7};
   int high{15};
-  std::tuple<int, int, double> res = findMaxCrossingSubArray(v, low, mid, high);
-  printTuple(res);
+  std::cout << "Using findMaxCrossingSubArray: \n";
+  std::tuple<int, int, int> res1 = findMaxCrossingSubArray(v, low, mid, high);
+  printTuple(res1);
+
+  std::cout << "Using findMaxSubArray: \n";
+  std::tuple<int, int, int> res2 = findMaxSubArray(v, low, high);
+  printTuple(res2);
 
   return 0;
 }
