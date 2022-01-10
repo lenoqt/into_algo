@@ -1,3 +1,7 @@
+\usepackage [utf8] 
+\usepackage {amsmath, amsfofntts, amstthm, graphicx, geometry, lipsum}
+
+
 # The maximum-subarray problem
 
 Suppose that you been offered the opportunity to invest in the Volatile Chemical Corp. 
