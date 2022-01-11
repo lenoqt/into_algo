@@ -22,7 +22,7 @@ easy to determine how to maximize profit: find the highest and lowest prices, an
 left from the highest price to find the lowest prior price, work right from the lowest price 
 to find the highest later price, and take the pair with the greater difference.
 
-Figure:
+
 ![Figure 4-1](./fig4-1.png)
 ![Figure 4-2](./fig4-2.png)
 
