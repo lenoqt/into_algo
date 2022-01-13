@@ -40,9 +40,9 @@ int main(int argc, char *argv[]) {
 
   matrix C = squareMatrixMul(A, B);
   printMatrix(A);
-  std::cout << "*\n"; 
+  std::cout << "*\n\n"; 
   printMatrix(B);
-  std::cout << " =\n";
+  std::cout << " =\n\n";
   printMatrix(C);
   return 0;
 }
